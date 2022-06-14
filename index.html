@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="This is a super basic webpage.">
@@ -14,90 +14,83 @@
     <!-- Add custom CSS here -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        .auto-style3 {
+            text-align: center;
+            font-size: xx-large;
+        }
 
-  </head>
+        .newStyle1 {
+            font-size: 72px;
+            font-weight: normal;
+            font-family: "Courier New", Courier, monospace;
+            color: #5E5E5E;
+        }
 
-  <body>
-  
+        .auto-style4 {
+            text-align: center;
+            font-size: x-large;
+        }
+    </style>
+</head>
+
+<body>
+
     <div id="wrapper">
-      
-      <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-          <ul class="sidebar-nav">
-              <li class="sidebar-brand"><a href="#">About Me</a></li>
-              <li><a href="https://www.linkedin.com/in/claytonvantol/">LinkedIn</a></li>
-              <li><a href="https://github.com/1337vt">GitHub</a></li>
-              <li><a href="https://www.facebook.com/clayton.vantol/">FaceBook</a></li>
-              <!--
-    <li><a href="#">Events</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Services</a></li>
-    <li><a href="#">Contact</a></li>
-    -->
-          </ul>
-      </div>
-          
-      <!-- Page content -->
-      <div id="page-content-wrapper">
-        <div class="content-header">
-          <h1>
-            <a id="menu-toggle" href="#" class="btn btn-default"><i class="icon-reorder"></i></a>
-            Clayton VanTol
-          </h1>
-          verified...  ✅
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"><a href="../aboutme.html">About Me</a></li>
+                <li><a href="https://www.linkedin.com/in/claytonvantol/">LinkedIn</a></li>
+                <li><a href="https://github.com/1337vt">GitHub</a></li>
+                <li><a href="https://www.facebook.com/clayton.vantol/">FaceBook</a></li>
+                <!--
+                <li><a href="#">Events</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                -->
+            </ul>
         </div>
-        <!-- Keep all page content within the page-content inset div! -->
-        <div class="page-content inset">
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="lead">MS Cybersecurity, CISSP, GCFA, GCWN, GREM, AWS Cloud Practitioner, A+, Network+, Security+, Pentest+, CEH</p>
-                </div>
-                <div class="col-md-3">
-                    <p class="well">PowerShell</p>
-                </div>
-                <div class="col-md-3">
-                    <p class="well">Reverse Engineering Malware</p>
-                </div>
-                <div class="col-md-3">
-                    <p class="well">Protocol &amp; traffic analysis</p>
-                </div>
-                <div class="col-md-3">
-                    <p class="well">Digital Forensics</p>
-                </div>
-                <div class="col-md-3">
-                    <p class="well">TTP-based Threat Hunting</p>
-                </div>
-                <div class="col-md-3">
-                    <p class="well">Python</p>
-                </div>
-                <div class="col-md-3">
-                    <p class="well">Military Veteran</p>
-                </div>
-                <div class="col-md-3">
-                    <p class="well">Critical Thinking</p>
-                </div>
-                <div class="col-md-12">
-                    <p class="lead">Cyberspace Operator and military veteran located in San Antonio, Texas.  I have 20 years of military experience with over 7 years of TTP-based threat hunting, malware reverse-engineering, and digital forensics spanning from enterprise Windows environments to Unix-based ICS/SCADA National Critical Infrastructure.  I've participated on and led teams from several federally declared combat zones to numerous locations within the United States.  Additionally, I have experienced diversity first-hand by uprooting myself completely to reside in a foreign nation while being immersed in local Japanese culture for a continuous four years.  I'm looking for an opportunity to put the skills I've learned over the past 22 years to good use.  I chose Military life to protect this great nation.  Now that I've completed my service to the nation honorably, I have a wealth of knowledge at my disposal just waiting to be employed by your team.</p>
-                </div>
-                <div class="col-sm-12">
-                    <p>Click the "LinkedIn" profile in the navigation menu for more information.</p>
+
+        <!-- Page content -->
+        <div id="page-content-wrapper">
+            <div class="content-header">
+                <h1>
+                    <a id="menu-toggle" href="#" class="btn btn-default"><i class="icon-reorder"></i></a>
+                </h1>
+            </div>
+            <!-- Keep all page content within the page-content inset div! -->
+            <div class="page-content inset">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <p class="page-content">
+                            <p class="auto-style3">
+                                <span class="newStyle1">Clayton VanTol</span>
+                            </p>
+                            <h1 class="auto-style4"><strong>0x54 0x47 0x56 0x68 0x5a 0x43 0x42 0x69 </strong></h1>
+                            <h1 class="auto-style4"><strong>0x65 0x53 0x42 0x6c 0x65 0x47 0x46 0x74 </strong></h1>
+                            <h1 class="auto-style4"><strong>0x63 0x47 0x78 0x6c 0x4c 0x67 0x3d 0x3d</strong></h1>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
-      
+
     </div>
-	
+
     <!-- JavaScript -->
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
 
     <!-- Custom JavaScript for the Menu Toggle -->
     <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("active");
-    });
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("active");
+        });
     </script>
-  </body>
+</body>
 </html>
