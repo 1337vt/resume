@@ -15,7 +15,7 @@ hex-puzzle {
 .grid-container {
     display: grid;
     column-gap: 1px;
-    grid-template-columns: 80px auto auto;
+    grid-template-columns: 95px auto auto;
     padding: 2px;
     font-size: 25px;
   }
