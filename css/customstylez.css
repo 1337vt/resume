@@ -11,19 +11,3 @@ hex-puzzle {
     justify-content: center;
     font-weight: bold;
 }
-
-.grid-container {
-    display: grid;
-    column-gap: 1px;
-    grid-template-columns: 95px auto auto;
-    padding: 2px;
-    font-size: 25px;
-  }
-
-  .grid-item {
-    background-color: rgba(228, 228, 228, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 1px;
-    font-size: 14px;
-    text-align: left;
-  }
