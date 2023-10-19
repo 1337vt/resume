@@ -1,13 +1,12 @@
 front-page-name {
-    font-size: 5em;
+    font-size: 3em;
     font-family: 'Courier New', Courier, monospace;
     justify-content: center;
     color: rgb(70, 70, 70);
 }
 
 hex-puzzle {
-    font-size: 2em;
+    font-size: 1.3em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     justify-content: center;
-    font-weight: bold;
 }
