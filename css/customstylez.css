@@ -1,13 +1,76 @@
+/* Custom styles for claytonvantol.com */
+
+/* Front Page Specific Styles */
 .front-page-name {
     font-size: 48px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     text-align: center;
-    color: rgb(70, 70, 70);
+    color: rgb(70, 70, 70); /* Consider changing this to a Bootstrap theme color or a lighter shade if the body is dark */
 }
 
 .hex-puzzle {
     font-size: 24px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
+}
+
+/* General Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* Custom background color for a slightly less harsh dark mode */
+/* Note: You are using `bg-secondary` on the body. If you want this custom color, apply `bg-light-dark` to the body instead. */
+.bg-light-dark {
+    background-color: #212529; /* A shade darker than Bootstrap's secondary */
+}
+
+/* Card Styling for Certifications */
+.card {
+    border-radius: 15px; /* Slightly rounded corners for cards */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.card-title {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid; /* Underline effect for titles */
+    padding-bottom: 0.5rem;
+}
+
+/* These variables refer to Bootstrap's default color palette. Ensure they are compatible with your dark theme. */
+.card-title.text-primary { border-color: var(--bs-primary); } /* Blue for GIAC */
+.card-title.text-success { border-color: var(--bs-success); } /* Green for CompTIA */
+.card-title.text-info { border-color: var(--bs-info); }     /* Cyan for Others */
+
+.education-table {
+    border-radius: 10px; /* Slightly rounded corners for the table */
+    overflow: hidden; /* Ensures borders are contained within the radius */
+}
+
+.list-unstyled li {
+    padding-left: 0.5rem;
+    position: relative;
+}
+
+.list-unstyled li::before {
+    content: "\2022"; /* Bullet point */
+    color: #0d6efd; /* Bootstrap primary color - consider if this stands out on a dark background */
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Specific styling for the expired badge */
+.badge.bg-danger {
+    font-weight: normal;
+    font-size: 0.75em;
+    vertical-align:auto;
 }
