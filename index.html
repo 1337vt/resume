@@ -35,6 +35,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="aboutme.html">About Me</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="referrals.html">Referrals</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Social Media
@@ -52,15 +55,31 @@
 
     <main class="container py-5 text-center">
         <h1 class="front-page-name display-3 mb-4">Clayton VanTol</h1>
-        <p class="hex-puzzle lead mb-0">0x54 0x47 0x56 0x68 0x5a 0x43 0x42 0x69</p>
-        <p class="hex-puzzle lead mb-0">0x65 0x53 0x42 0x6c 0x65 0x47 0x46 0x74</p>
-        <p class="hex-puzzle lead">0x63 0x47 0x78 0x6c 0x4c 0x67 0x3d 0x3d</p>
+        <p class="hex-puzzle lead mb-0" id="hex1" onclick="decodeHex()" style="cursor: pointer;">0x54 0x47 0x56 0x68 0x5a 0x43 0x42 0x69</p>
+        <p class="hex-puzzle lead mb-0" id="hex2" onclick="decodeHex()" style="cursor: pointer;">0x65 0x53 0x42 0x6c 0x65 0x47 0x46 0x74</p>
+        <p class="hex-puzzle lead" id="hex3" onclick="decodeHex()" style="cursor: pointer;">0x63 0x47 0x78 0x6c 0x4c 0x67 0x3d 0x3d</p>
     </main>
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous">
+    </script>
+    <script>
+        let decoded = false;
+        function decodeHex() {
+            if (decoded) return;
+            const hex = "54 47 56 68 5a 43 42 69 65 53 42 6c 65 47 46 74 63 47 78 6c 4c 67 3d 3d".replace(/ /g, "");
+            let result = "";
+            for (let i = 0; i < hex.length; i += 2) {
+                result += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+            }
+            result = atob(result);
+            document.getElementById("hex1").style.display = "none";
+            document.getElementById("hex2").textContent = result;
+            document.getElementById("hex3").style.display = "none";
+            decoded = true;
+        }
     </script>
 </body>
 </html>
