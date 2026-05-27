@@ -206,13 +206,12 @@ O[\\\\\\\\\(O):::&lt;=============================================-
 
             <hr class="separator" style="opacity:0.12; margin:16px 0;">
 
-            <details style="font-size:10px; color:var(--gray); opacity:0.35; cursor:pointer;">
-                <summary style="font-size:10px; color:var(--gray); cursor:pointer; user-select:none; display:list-item;">
-                    ~ $ tail -n 1 /var/log/news
+            <details id="news-details" style="font-size:10px; color:var(--gray); cursor:pointer;">
+                <summary id="news-summary" style="font-size:10px; color:var(--gray); cursor:pointer; user-select:none; display:list-item;">
+                    ~ $ tail /var/log/news
                 </summary>
-                <div style="margin-top:8px; font-size:11px; line-height:1.8;">
-                    <a href="news/blackstone-parmesan-ranch-recall.html" style="color:var(--gray); display:block;">&gt; Blackstone Parmesan Ranch Recall &mdash; Salmonella Warning (2026)</a>
-                </div>
+                <div id="news-container" style="margin-top:8px; font-size:11px; line-height:1.8;"></div>
+                <div id="news-nav" style="margin-top:8px; font-size:11px; line-height:1.8; color:var(--gray);"></div>
             </details>
         </div>
 
@@ -286,6 +285,70 @@ O[\\\\\\\\\(O):::&lt;=============================================-
             h2.style.cursor = 'default';
             h3.style.cursor = 'default';
         }
+    </script>
+
+    <script>
+        // =========================================================================
+        // NEWS ARTICLE INDEX  —  Add new entries at the TOP (newest first).
+        // Each entry:  { title, url, date (display string), category, section }
+        // =========================================================================
+        const newsArticles = [
+            { title: "Blackstone Parmesan Ranch Recall \u2014 Salmonella Warning (2026)", url: "news/blackstone-parmesan-ranch-recall.html", date: "2026-05-26", category: "FDA Food Safety Alert" },
+        ];
+
+        const ARTICLES_PER_PAGE = 5;
+        let currentPage = 1;
+        const totalPages = Math.ceil(newsArticles.length / ARTICLES_PER_PAGE) || 1;
+
+        function renderNews() {
+            const container = document.getElementById('news-container');
+            const nav = document.getElementById('news-nav');
+            const summary = document.getElementById('news-summary');
+            if (!container) return;
+
+            const start = (currentPage - 1) * ARTICLES_PER_PAGE;
+            const page = newsArticles.slice(start, start + ARTICLES_PER_PAGE);
+
+            // Update summary line to reflect total count
+            if (summary) {
+                summary.textContent = '~ $ tail /var/log/news  [' + newsArticles.length + ' articles]';
+            }
+
+            // Render articles
+            container.innerHTML = page.map(function(a) {
+                return '<a href="' + a.url + '" style="color:var(--lime); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">'
+                    + '<span style="color:var(--lime);">&gt;</span> '
+                    + '<span style="color:var(--gray);">' + a.date + '</span>  '
+                    + a.title
+                    + '</a>';
+            }).join('');
+
+            // Render less-style nav
+            var navHtml = '<span style="color:var(--green);">:</span>  ';
+            if (currentPage > 1) {
+                navHtml += '<a href="#" onclick="newsPage(-1); return false;" style="color:var(--text); text-decoration:none;">[p]rev</a>  ';
+            } else {
+                navHtml += '<span style="color:var(--gray);">[p]rev</span>  ';
+            }
+            if (currentPage < totalPages) {
+                navHtml += '<a href="#" onclick="newsPage(1); return false;" style="color:var(--text); text-decoration:none;">[n]ext</a>  ';
+            } else {
+                navHtml += '<span style="color:var(--gray);">[n]ext</span>  ';
+            }
+            navHtml += '<span style="color:var(--text);">page ' + currentPage + '/' + totalPages + '</span>';
+
+            if (nav) nav.innerHTML = navHtml;
+        }
+
+        function newsPage(dir) {
+            var next = currentPage + dir;
+            if (next < 1 || next > totalPages) return;
+            currentPage = next;
+            renderNews();
+        }
+
+        // Render on page load
+        document.addEventListener('DOMContentLoaded', renderNews);
     </script>
 </body>
 </html>
