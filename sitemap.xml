@@ -25,6 +25,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://claytonvantol.us/privacy.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.1</priority>
+  </url>
+  <url>
     <loc>https://claytonvantol.us/news/cve-2026-48027-nx-nx-console.html</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>

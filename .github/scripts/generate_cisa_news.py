@@ -329,6 +329,7 @@ def render_article(cve, slug):
         <div class="bottom-bar">
             <span>UPTIME: 1337d</span>
             <span>v2.0.1</span>
+            <span><a href="../privacy.html" style="color:var(--gray); text-decoration:none;">privacy</a></span>
             <span>LAST LOGIN: {now} UTC</span>
         </div>
     </div>
