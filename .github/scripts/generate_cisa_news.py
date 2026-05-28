@@ -180,7 +180,7 @@ def render_article(cve, slug):
                          data-ad-format="fluid"
                          data-ad-client="ca-pub-2188611073019382"
                          data-ad-slot="4187618054"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
 
                     <h2 style="color:var(--lime); font-size:13px; margin-bottom:10px; margin-top:24px;">
                         &gt; AFFECTED SOFTWARE
