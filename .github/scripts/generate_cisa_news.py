@@ -307,7 +307,7 @@ def render_article(cve, slug):
              data-ad-slot="8047961692"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
     </div>
     <div class="terminal fade-in">
         <div class="top-bar">
@@ -358,7 +358,7 @@ def render_article(cve, slug):
              data-ad-slot="1902189895"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
     </div>
 </div><!-- .page-wrapper -->
 </body>
