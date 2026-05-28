@@ -174,6 +174,14 @@ def render_article(cve, slug):
                         {xesc(cve['shortDescription'])}
                     </p>
 
+                    <ins class="adsbygoogle"
+                         style="display:block; text-align:center;"
+                         data-ad-layout="in-article"
+                         data-ad-format="fluid"
+                         data-ad-client="ca-pub-2188611073019382"
+                         data-ad-slot="4187618054"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
                     <h2 style="color:var(--lime); font-size:13px; margin-bottom:10px; margin-top:24px;">
                         &gt; AFFECTED SOFTWARE
                     </h2>
@@ -291,6 +299,16 @@ def render_article(cve, slug):
     </script>
 </head>
 <body>
+<div class="page-wrapper">
+    <div class="ad-column ad-left">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2188611073019382"
+             data-ad-slot="8047961692"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
     <div class="terminal fade-in">
         <div class="top-bar">
             <div class="left">
@@ -333,6 +351,16 @@ def render_article(cve, slug):
             <span>LAST LOGIN: {now} UTC</span>
         </div>
     </div>
+    <div class="ad-column ad-right">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2188611073019382"
+             data-ad-slot="1902189895"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+</div><!-- .page-wrapper -->
 </body>
 </html>'''
 

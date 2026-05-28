@@ -402,3 +402,31 @@ a:visited {
 #vendor-dropdown {
     width: 100%;
 }
+
+/* --- Ad columns flanking the terminal --- */
+
+.page-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 960px) minmax(0, 1fr);
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.ad-column {
+    display: flex;
+    justify-content: center;
+    padding: 100px 12px 0;
+    min-width: 0;
+}
+
+@media (max-width: 1300px) {
+    .ad-column {
+        display: none;
+    }
+    .page-wrapper {
+        display: block;
+        max-width: 960px;
+    }
+}
