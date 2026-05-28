@@ -400,8 +400,40 @@ def ping_indexnow(cves, slugs):
         print(f"  IndexNow ping failed: {e}", file=sys.stderr)
 
 
+def process_cves(cves, state, published, force=False):
+    """Render articles for a list of CVEs. Returns list of (cve, slug) created.
+
+    If an article file already exists, the CVE is added to state and skipped
+    (unless force=True, which forces re-render for test mode).
+    """
+    created = []
+    for cve in cves:
+        slug = article_slug(cve)
+        cve_id = cve["cveID"]
+        article_path = NEWS / f"{slug}.html"
+
+        if not force and article_path.exists():
+            print(f"  {cve_id} → article exists, skipped")
+            if cve_id not in published:
+                state["publishedCves"].append(cve_id)
+            continue
+
+        created.append((cve, slug))
+
+        print(f"  Rendering {cve_id} -> news/{slug}.html")
+        (NEWS / f"{slug}.html").write_text(render_article(cve, slug))
+
+        print(f"  Generating OG image -> news/images/{slug}.jpg")
+        make_og_image(cve, slug)
+
+        state["publishedCves"].append(cve_id)
+
+    return created
+
+
 def main():
     test_cve = os.environ.get("TEST_CVE", "").strip() or None
+    backfill_year = os.environ.get("BACKFILL_YEAR", "").strip() or None
     IMAGES.mkdir(parents=True, exist_ok=True)
 
     print("Fetching CISA KEV feed ...")
@@ -414,6 +446,32 @@ def main():
         "lastCatalogVersion": "",
         "lastDateReleased": "",
     }
+    published = set(state["publishedCves"])
+
+    # --- Backfill: process all CVEs from a given year ---
+    if backfill_year:
+        print(f"  Backfill mode: year {backfill_year}")
+        candidates = [v for v in kev["vulnerabilities"]
+                      if v["dateAdded"].startswith(backfill_year)]
+        print(f"  Found {len(candidates)} CVEs from {backfill_year}")
+
+        created = process_cves(candidates, state, published, force=False)
+
+        if created:
+            new_cves, new_slugs = zip(*created)
+            print("  Updating index.html ...")
+            inject_into_index(new_cves, new_slugs)
+            print("  Updating sitemap.xml ...")
+            update_sitemap(new_cves, new_slugs)
+            ping_indexnow(new_cves, new_slugs)
+
+        state["baselineComplete"] = True
+        state["lastCatalogVersion"] = kev["catalogVersion"]
+        state["lastDateReleased"] = kev["dateReleased"]
+        STATE_FILE.write_text(json.dumps(state, indent=2) + "\n")
+
+        print(f"Done. {len(created)} new article(s) generated from {backfill_year}.")
+        return
 
     # --- Baseline: snapshot all CVEs without generating articles ---
     if not state["baselineComplete"] and not test_cve:
@@ -426,56 +484,54 @@ def main():
         print("  No articles generated. Next run will process new CVEs.")
         return
 
-    # --- Detect new CVEs ---
-    published = set(state["publishedCves"])
-    candidates = []
-
+    # --- Test mode: process a single CVE (force re-render, skip state save) ---
     if test_cve:
         match = [v for v in kev["vulnerabilities"] if v["cveID"] == test_cve]
         if not match:
             print(f"  ERROR: {test_cve} not found in feed.")
             sys.exit(1)
-        if test_cve in published:
-            print(f"  {test_cve} already published. Nothing to do.")
-            return
-        candidates = match
         print(f"  Test mode: processing {test_cve}")
-    else:
-        candidates = [v for v in kev["vulnerabilities"] if v["cveID"] not in published]
+        created = process_cves(match, state, published, force=True)
 
+        if created:
+            new_cves, new_slugs = zip(*created)
+            print("  Updating index.html ...")
+            inject_into_index(new_cves, new_slugs)
+            print("  Updating sitemap.xml ...")
+            update_sitemap(new_cves, new_slugs)
+            ping_indexnow(new_cves, new_slugs)
+
+        # Never save state in test mode — allows repeated testing
+        print(f"Done. {len(created)} article(s) generated (test mode, state not saved).")
+        return
+
+    # --- Incremental mode: process new CVEs not yet published ---
+    candidates = [v for v in kev["vulnerabilities"] if v["cveID"] not in published]
     if not candidates:
         print("  No new CVEs to process.")
         return
 
-    # --- Process each candidate ---
-    slugs = []
-    for cve in candidates:
-        slug = article_slug(cve)
-        slugs.append(slug)
+    created = process_cves(candidates, state, published, force=False)
 
-        print(f"  Rendering {cve['cveID']} -> news/{slug}.html")
-        html = render_article(cve, slug)
-        (NEWS / f"{slug}.html").write_text(html)
+    if not created:
+        print("  All candidates already exist as files. Updating state.")
+        state["lastCatalogVersion"] = kev["catalogVersion"]
+        state["lastDateReleased"] = kev["dateReleased"]
+        STATE_FILE.write_text(json.dumps(state, indent=2) + "\n")
+        return
 
-        print(f"  Generating OG image -> news/images/{slug}.jpg")
-        make_og_image(cve, slug)
-
-        state["publishedCves"].append(cve["cveID"])
-
+    new_cves, new_slugs = zip(*created)
     print("  Updating index.html ...")
-    inject_into_index(candidates, slugs)
-
+    inject_into_index(new_cves, new_slugs)
     print("  Updating sitemap.xml ...")
-    update_sitemap(candidates, slugs)
+    update_sitemap(new_cves, new_slugs)
 
     state["lastCatalogVersion"] = kev["catalogVersion"]
     state["lastDateReleased"] = kev["dateReleased"]
+    STATE_FILE.write_text(json.dumps(state, indent=2) + "\n")
 
-    if not test_cve:
-        STATE_FILE.write_text(json.dumps(state, indent=2) + "\n")
-
-    ping_indexnow(candidates, slugs)
-    print(f"Done. {len(candidates)} article(s) generated.")
+    ping_indexnow(new_cves, new_slugs)
+    print(f"Done. {len(created)} article(s) generated.")
 
 
 if __name__ == "__main__":

@@ -9,6 +9,10 @@ on:
         description: 'Test with a specific CVE ID (e.g., CVE-2026-48027)'
         required: false
         type: string
+      backfill_year:
+        description: 'Generate articles for all CVEs from a year (e.g., 2026)'
+        required: false
+        type: string
 
 jobs:
   generate:
@@ -29,6 +33,7 @@ jobs:
         run: python .github/scripts/generate_cisa_news.py
         env:
           TEST_CVE: ${{ inputs.test_cve }}
+          BACKFILL_YEAR: ${{ inputs.backfill_year }}
 
       - name: Commit and push if changes
         run: |
