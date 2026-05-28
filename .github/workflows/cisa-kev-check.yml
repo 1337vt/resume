@@ -1,0 +1,39 @@
+name: CISA KEV News Generator
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      test_cve:
+        description: 'Test with a specific CVE ID (e.g., CVE-2026-48027)'
+        required: false
+        type: string
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests Pillow
+
+      - name: Run generator
+        run: python .github/scripts/generate_cisa_news.py
+        env:
+          TEST_CVE: ${{ inputs.test_cve }}
+
+      - name: Commit and push if changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --quiet --staged; then
+            git commit -m "auto: CISA KEV news [$(date +%Y-%m-%d)]"
+            git push
+          fi

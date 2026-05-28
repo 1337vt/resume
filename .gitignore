@@ -1,6 +1,5 @@
 # Keep the actual .gitignore file
 !.gitignore
-!.github/scripts/generate_cisa_news.py
-!.github/workflows/cisa-kev-check.yml
 # but hide all dot-prefixed files.
-.*
+.resume_venv
+.working_directory
