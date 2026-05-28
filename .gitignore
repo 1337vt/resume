@@ -1,5 +1,5 @@
 # Keep the actual .gitignore file
 !.gitignore
-
+!.github/
 # but hide all dot-prefixed files.
 .*
