@@ -344,7 +344,7 @@ def inject_into_index(cves, slugs):
     for cve, slug in zip(cves, slugs):
         t = f"{cve['cveID']} \u2014 {cve['vulnerabilityName']} ({cve['dateAdded'][:4]})"
         new_entries.append(
-            f'            {{ title: "{xesc(t)}", url: "news/{slug}.html", date: "{cve["dateAdded"]}", category: "CISA Known Exploited Vulnerability" }},'
+            f'            {{ title: "{xesc(t)}", url: "news/{slug}.html", date: "{cve["dateAdded"]}", category: "CISA Known Exploited Vulnerability", vendor: "{xesc(cve["vendorProject"])}" }},'
         )
 
     insert_after = -1
