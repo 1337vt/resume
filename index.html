@@ -181,7 +181,7 @@ O[\\\\\\\\\(O):::&lt;=============================================-
             <hr class="separator">
 
             <h2 style="color:var(--gray); font-size:13px; margin-bottom:12px;">
-                <span style="color:var(--green);">$</span> ./decrypt --puzzle
+                <span style="color:var(--green);">$</span> ./decode puzzle.hex
             </h2>
             <p style="color:var(--gray); font-size:11px; margin-bottom:6px;">
                 -- click to decode --
@@ -200,14 +200,14 @@ O[\\\\\\\\\(O):::&lt;=============================================-
 
             <div id="news-details" style="margin-top:8px; color:var(--gray);">
                 <div style="color:var(--gray); font-size:12px; margin-bottom:8px;">
-                    ~ $ tail /var/log/news  [<span id="news-count"></span> articles]
+                    ~ $ ls -ahl /var/log/cve  [<span id="news-count"></span> articles]
                 </div>
 
                 <div id="news-search-row" style="font-size:18px; line-height:1.8; display:flex; align-items:center; flex-wrap:wrap; gap:2px;">
                     <span style="color:var(--green);">$</span>
                     <span> grep -i&nbsp;</span>
                     <input type="text" id="news-search" class="news-search" placeholder="search ..." autocomplete="off" spellcheck="false">
-                    <span id="search-suffix"> /var/log/news/</span>
+                    <span id="search-suffix"> /var/log/cve/</span>
                 </div>
 
                 <div id="news-years" style="margin-top:6px; display:flex; flex-wrap:wrap; gap:4px; align-items:center;"></div>
