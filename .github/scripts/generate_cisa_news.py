@@ -364,6 +364,13 @@ def render_article(cve, slug):
         <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
     </div>
 </div><!-- .page-wrapper -->
+<script>
+window.addEventListener('load', function() {
+    if (typeof adsbygoogle !== 'function') {
+        document.body.classList.add('ads-blocked');
+    }
+});
+</script>
 </body>
 </html>'''
 

@@ -66,7 +66,6 @@ body::after {
     flex-direction: column;
     position: relative;
     z-index: 1;
-    flex: 0 1 960px;
 }
 
 .top-bar {
@@ -407,7 +406,8 @@ a:visited {
 /* --- Ad columns flanking the terminal --- */
 
 .page-wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 960px) minmax(0, 1fr);
     max-width: 1400px;
     margin: 0 auto;
     position: relative;
@@ -415,8 +415,10 @@ a:visited {
 }
 
 .ad-column {
-    flex: 0 1 220px;
+    display: flex;
+    justify-content: center;
     padding: 100px 12px 0;
+    min-width: 0;
 }
 
 @media (max-width: 1300px) {
@@ -429,3 +431,12 @@ a:visited {
     }
 }
 
+body.ads-blocked .ad-column {
+    display: none;
+}
+
+body.ads-blocked .page-wrapper {
+    display: block;
+    max-width: 960px;
+    margin: 0 auto;
+}
