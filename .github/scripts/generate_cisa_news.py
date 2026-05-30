@@ -14,6 +14,9 @@ from datetime import datetime, UTC
 from pathlib import Path
 from xml.sax.saxutils import escape as xesc
 
+def jsesc(s):
+    return s.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n')
+
 import requests
 from PIL import Image, ImageDraw, ImageFont
 
@@ -274,7 +277,7 @@ def render_article(cve, slug):
     {{
         "@context": "https://schema.org",
         "@type": "NewsArticle",
-        "headline": "{xesc(title)}",
+        "headline": {json.dumps(title)},
         "description": "{xesc(desc)}",
         "datePublished": "{date_added}",
         "dateModified": "{date_added}",
@@ -293,7 +296,7 @@ def render_article(cve, slug):
         "itemListElement": [
             {{ "@type": "ListItem", "position": 1, "name": "Home", "item": "{SITE}/" }},
             {{ "@type": "ListItem", "position": 2, "name": "News", "item": "{SITE}/news/" }},
-            {{ "@type": "ListItem", "position": 3, "name": "{xesc(cve_id)}" }}
+            {{ "@type": "ListItem", "position": 3, "name": {json.dumps(cve_id)} }}
         ]
     }}
     </script>
@@ -373,7 +376,7 @@ def inject_into_index(cves, slugs):
     for cve, slug in zip(cves, slugs):
         t = f"{cve['cveID']} \u2014 {cve['vulnerabilityName']} ({cve['dateAdded'][:4]})"
         new_entries.append(
-            f'            {{ title: "{xesc(t)}", url: "news/{slug}.html", date: "{cve["dateAdded"]}", category: "CISA Known Exploited Vulnerability", vendor: "{xesc(cve["vendorProject"])}" }},'
+            f'            {{ title: "{jsesc(t)}", url: "news/{slug}.html", date: "{cve["dateAdded"]}", category: "CISA Known Exploited Vulnerability", vendor: "{jsesc(cve["vendorProject"])}" }},'
         )
 
     insert_after = -1
