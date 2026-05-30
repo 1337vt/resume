@@ -438,4 +438,5 @@ body.ads-blocked .ad-column {
 body.ads-blocked .page-wrapper {
     display: block;
     max-width: 960px;
+    margin: 0 auto;
 }
