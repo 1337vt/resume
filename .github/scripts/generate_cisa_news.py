@@ -365,11 +365,11 @@ def render_article(cve, slug):
     </div>
 </div><!-- .page-wrapper -->
 <script>
-window.addEventListener('load', function() {
-    if (typeof adsbygoogle !== 'function') {
+window.addEventListener('load', function() {{
+    if (typeof adsbygoogle !== 'function') {{
         document.body.classList.add('ads-blocked');
-    }
-});
+    }}
+}});
 </script>
 </body>
 </html>'''
