@@ -206,7 +206,7 @@ O[\\\\\\\\\(O):::&lt;=============================================-
 
             <div id="news-details" style="margin-top:6px; color:var(--gray);">
                 <div style="color:var(--gray); font-size:14px; margin-bottom:8px;">
-                    <span style="color:var(--green);">$</span> echo "[ $(ls -1 /var/log/news/ | wc -l) articles ]"
+                    <span style="color:var(--green);">$</span> echo "[ $(ls -1 /home/$USER/news/ | wc -l) articles ]"
                 </div>
                 <div style="margin-bottom:6px;">
                     <span style="color:var(--green);">[</span>
@@ -219,7 +219,7 @@ O[\\\\\\\\\(O):::&lt;=============================================-
                     <span style="color:var(--green);">$</span>
                     <span>&nbsp;grep -i&nbsp;</span>
                     <input type="text" id="news-search" class="news-search" placeholder="search..." autocomplete="off" spellcheck="false">
-                    <span id="search-suffix"> /var/log/news/</span>
+                    <span id="search-suffix">&nbsp;/home/$USER/news/</span>
                 </div>
 
                 <div id="news-years" style="margin-top:6px; display:flex; flex-wrap:wrap; gap:4px; align-items:center;"></div>
