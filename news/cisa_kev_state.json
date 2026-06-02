@@ -1607,8 +1607,9 @@
     "CVE-2021-40539",
     "CVE-2020-10189",
     "CVE-2019-8394",
-    "CVE-2020-29583"
+    "CVE-2020-29583",
+    "CVE-2024-21182"
   ],
-  "lastCatalogVersion": "2026.05.29",
-  "lastDateReleased": "2026-05-29T19:00:06.3429Z"
+  "lastCatalogVersion": "2026.06.01",
+  "lastDateReleased": "2026-06-01T16:59:32.7272Z"
 }
