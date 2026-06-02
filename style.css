@@ -224,11 +224,13 @@ a:visited {
 .badge-green {
     border: 1px solid var(--green);
     color: var(--green);
+    font-size: 14px;
 }
 
 .badge-lime {
     border: 1px solid var(--lime);
     color: var(--lime);
+    font-size: 14px;
 }
 
 .badge-orange {
