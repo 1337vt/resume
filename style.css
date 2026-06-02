@@ -224,13 +224,13 @@ a:visited {
 .badge-green {
     border: 1px solid var(--green);
     color: var(--green);
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .badge-lime {
     border: 1px solid var(--lime);
     color: var(--lime);
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .badge-orange {
@@ -244,7 +244,7 @@ a:visited {
 }
 
 .hex-puzzle {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--lime);
     cursor: pointer;
     transition: color 0.15s;
