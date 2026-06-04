@@ -1610,8 +1610,9 @@
     "CVE-2020-29583",
     "CVE-2024-21182",
     "CVE-2022-0492",
-    "CVE-2025-48595"
+    "CVE-2025-48595",
+    "CVE-2026-45247"
   ],
-  "lastCatalogVersion": "2026.06.02",
-  "lastDateReleased": "2026-06-02T17:04:13.1193Z"
+  "lastCatalogVersion": "2026.06.03",
+  "lastDateReleased": "2026-06-03T17:30:12.2205Z"
 }
