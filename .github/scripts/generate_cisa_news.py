@@ -30,7 +30,6 @@ REPO = Path(__file__).resolve().parent.parent.parent
 NEWS = REPO / "news"
 IMAGES = NEWS / "images"
 STATE_FILE = REPO / "news/cisa_kev_state.json"
-INDEX_FILE = REPO / "index.html"
 SITEMAP_FILE = REPO / "sitemap.xml"
 
 OG_W, OG_H = 1200, 630
@@ -177,14 +176,6 @@ def render_article(cve, slug):
                         {xesc(cve['shortDescription'])}
                     </p>
 
-                    <ins class="adsbygoogle"
-                         style="display:block; text-align:center;"
-                         data-ad-layout="in-article"
-                         data-ad-format="fluid"
-                         data-ad-client="ca-pub-2188611073019382"
-                         data-ad-slot="4187618054"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-
                     <h2 style="color:var(--lime); font-size:13px; margin-bottom:10px; margin-top:24px;">
                         &gt; AFFECTED SOFTWARE
                     </h2>
@@ -272,7 +263,6 @@ def render_article(cve, slug):
         gtag('js', new Date());
         gtag('config', 'G-W2QLVH4HZQ');
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2188611073019382" crossorigin="anonymous"></script>
     <script type="application/ld+json">
     {{
         "@context": "https://schema.org",
@@ -303,15 +293,6 @@ def render_article(cve, slug):
 </head>
 <body>
 <div class="page-wrapper">
-    <div class="ad-column ad-left">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2188611073019382"
-             data-ad-slot="8047961692"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-    </div>
     <div class="terminal fade-in">
         <div class="top-bar">
             <div class="left">
@@ -350,56 +331,12 @@ def render_article(cve, slug):
         <div class="bottom-bar">
             <span>UPTIME: 1337d</span>
             <span>v2.0.1</span>
-            <span><a href="../privacy.html" style="color:var(--gray); text-decoration:none;">privacy</a></span>
             <span>LAST LOGIN: {now} UTC</span>
         </div>
     </div>
-    <div class="ad-column ad-right">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2188611073019382"
-             data-ad-slot="1902189895"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-    </div>
 </div><!-- .page-wrapper -->
-<script>
-window.addEventListener('load', function() {{
-    if (typeof adsbygoogle !== 'function') {{
-        document.body.classList.add('ads-blocked');
-    }}
-}});
-</script>
 </body>
 </html>'''
-
-
-def inject_into_index(cves, slugs):
-    html = INDEX_FILE.read_text()
-    lines = html.split("\n")
-
-    new_entries = []
-    for cve, slug in zip(cves, slugs):
-        t = f"{cve['cveID']} \u2014 {cve['vulnerabilityName']} ({cve['dateAdded'][:4]})"
-        new_entries.append(
-            f'            {{ title: "{jsesc(t)}", url: "news/{slug}.html", date: "{cve["dateAdded"]}", category: "CISA Known Exploited Vulnerability", vendor: "{jsesc(cve["vendorProject"])}" }},'
-        )
-
-    insert_after = -1
-    for i, line in enumerate(lines):
-        if "const newsArticles = [" in line:
-            insert_after = i
-            break
-
-    if insert_after < 0:
-        print("WARNING: could not find newsArticles array in index.html", file=sys.stderr)
-        return
-
-    for entry in reversed(new_entries):
-        lines.insert(insert_after + 1, entry)
-
-    INDEX_FILE.write_text("\n".join(lines) + "\n")
 
 
 def update_sitemap(cves, slugs):
@@ -498,8 +435,6 @@ def main():
 
         if created:
             new_cves, new_slugs = zip(*created)
-            print("  Updating index.html ...")
-            inject_into_index(new_cves, new_slugs)
             print("  Updating sitemap.xml ...")
             update_sitemap(new_cves, new_slugs)
             ping_indexnow(new_cves, new_slugs)
@@ -534,8 +469,6 @@ def main():
 
         if created:
             new_cves, new_slugs = zip(*created)
-            print("  Updating index.html ...")
-            inject_into_index(new_cves, new_slugs)
             print("  Updating sitemap.xml ...")
             update_sitemap(new_cves, new_slugs)
             ping_indexnow(new_cves, new_slugs)
@@ -560,8 +493,6 @@ def main():
         return
 
     new_cves, new_slugs = zip(*created)
-    print("  Updating index.html ...")
-    inject_into_index(new_cves, new_slugs)
     print("  Updating sitemap.xml ...")
     update_sitemap(new_cves, new_slugs)
 

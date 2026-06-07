@@ -4,7 +4,6 @@
     --orange: #FC440F;
     --lime: #B4E33D;
     --gray: #7C9299;
-    --purple: #1F01B9;
     --text: #c9d1d9;
 }
 
@@ -133,26 +132,6 @@ h1, h2, h3, h4 {
     opacity: 0.4;
 }
 
-.prompt {
-    color: var(--gray);
-}
-
-.prompt::before {
-    content: "> ";
-    color: var(--green);
-}
-
-.prompt-cursor::after {
-    content: "\258C";
-    color: var(--green);
-    animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
 .glitch {
     position: relative;
     animation: glitchCycle 10s infinite;
@@ -238,11 +217,6 @@ a:visited {
     color: var(--orange);
 }
 
-.badge-gray {
-    border: 1px solid var(--gray);
-    color: var(--gray);
-}
-
 .hex-puzzle {
     font-size: 14px;
     color: var(--lime);
@@ -253,12 +227,6 @@ a:visited {
 .hex-puzzle:hover {
     color: var(--orange);
     text-shadow: 0 0 10px rgba(252, 68, 15, 0.5);
-}
-
-.hex-puzzle.decoded {
-    color: var(--green);
-    font-size: 18px;
-    letter-spacing: 2px;
 }
 
 .grid-2 {
@@ -273,14 +241,8 @@ a:visited {
     gap: 16px;
 }
 
-.grid-4 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
 @media (max-width: 768px) {
-    .grid-2, .grid-3, .grid-4 {
+    .grid-2, .grid-3 {
         grid-template-columns: 1fr;
     }
     .terminal {
@@ -327,118 +289,9 @@ a:visited {
     color: var(--bg);
 }
 
-#news-details {
-    --gray: #99b0b8;
-}
-
-.news-search {
-    background: transparent;
-    border: 1px solid #555;
-    border-radius: 2px;
-    color: var(--green);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 18px;
-    outline: none;
-    width: 200px;
-    caret-color: var(--green);
-    padding: 1px 3px;
-    margin: 0;
-}
-
-.news-search:focus {
-    border-color: var(--green);
-}
-
-.news-search::placeholder {
-    color: var(--gray);
-    opacity: 0.5;
-}
-
-.news-search:focus::placeholder {
-    opacity: 0.2;
-}
-
-.filter-label {
-    color: var(--gray);
-    white-space: nowrap;
-}
-
-.filter-badge {
-    display: inline-block;
-    padding: 1px 6px;
-    border: 1px solid var(--gray);
-    color: var(--gray);
-    font-size: 11px;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.15s;
-    white-space: nowrap;
-}
-
-.filter-badge:hover {
-    border-color: var(--green);
-    color: var(--green);
-}
-
-.filter-badge.active {
-    background: var(--green);
-    color: var(--bg);
-    border-color: var(--green);
-}
-
-.filter-clear {
-    border-color: var(--orange);
-    color: var(--orange);
-}
-
-.filter-clear:hover {
-    border-color: var(--orange);
-    color: var(--bg);
-    background: var(--orange);
-}
-
-.vendor-more {
-    border-style: dashed;
-}
-
-#vendor-dropdown {
-    width: 100%;
-}
-
-/* --- Ad columns flanking the terminal --- */
-
 .page-wrapper {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 960px) minmax(0, 1fr);
-    max-width: 1400px;
+    max-width: 960px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
-}
-
-.ad-column {
-    display: flex;
-    justify-content: center;
-    padding: 100px 12px 0;
-    min-width: 0;
-}
-
-@media (max-width: 1300px) {
-    .ad-column {
-        display: none;
-    }
-    .page-wrapper {
-        display: block;
-        max-width: 960px;
-    }
-}
-
-body.ads-blocked .ad-column {
-    display: none;
-}
-
-body.ads-blocked .page-wrapper {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto;
 }
